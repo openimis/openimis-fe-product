@@ -35,6 +35,11 @@ export const validateProductForm = (values, rules, isProductCodeValid) => {
     errors.dateTo = true;
   }
 
+  if (values.ageMaximal < values.ageMinimal){
+    errors.ageMaximal = true;
+    errors.ageMinimal = true;
+  }
+
   if (!isProductCodeValid) {
     errors.isProductCodeInvalid = true;
   }
@@ -84,6 +89,8 @@ export const toFormValues = (product, shouldDuplicate) => {
     ...product,
     code: shouldDuplicate ? "" : product.code ?? "",
     lumpSum: product.lumpSum ?? 0,
+    ageMaximal: product.ageMaximal ?? 0,
+    ageMinimal: product.ageMinimal ?? 0,
     maxMembers: product.maxMembers ?? 0,
     insurancePeriod: product.insurancePeriod ?? 12,
     gracePeriodPayment: product.gracePeriodPayment ?? 0,
@@ -107,6 +114,8 @@ export const toInputValues = (values) => {
     id,
     code,
     location,
+    ageMinimal,
+    ageMaximal,
     conversionProduct,
     validityTo,
     validityFrom,
@@ -150,6 +159,8 @@ export const toInputValues = (values) => {
     services: hasEditedServices ? services.map(formatService) : undefined,
     items: hasEditedItems ? items.map(formatItem) : undefined,
     uuid,
+    ageMinimal,
+    ageMaximal,
     maxInstallments: maxInstallments ? Number(maxInstallments) : null,
     code: code,
     dateFrom: toISODate(values.dateFrom),
