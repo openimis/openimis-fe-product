@@ -10,7 +10,6 @@ export const validateProductForm = (values, rules, isProductCodeValid) => {
     "name",
     "maxMembers",
     "insurancePeriod",
-    "maxInstallments",
     "gracePeriodPayment",
     "dateFrom",
     "dateTo",
@@ -94,7 +93,6 @@ export const toFormValues = (product, shouldDuplicate) => {
     ageMinimal: product.ageMinimal ?? 0,
     maxMembers: product.maxMembers ?? 0,
     insurancePeriod: product.insurancePeriod ?? 12,
-    maxInstallments: product.maxInstallments ?? 1,
     gracePeriodPayment: product.gracePeriodPayment ?? 0,
     gracePeriodEnrolment: product.gracePeriodEnrolment ?? 0,
     gracePeriodRenewal: product.gracePeriodRenewal ?? 0,
@@ -126,6 +124,7 @@ export const toInputValues = (values) => {
     items,
     services,
     ceilingType,
+    maxInstallments,
     ...inputValues
   } = values;
 
@@ -162,6 +161,7 @@ export const toInputValues = (values) => {
     uuid,
     ageMinimal,
     ageMaximal,
+    maxInstallments: maxInstallments ? Number(maxInstallments) : null,
     code: code,
     dateFrom: toISODate(values.dateFrom),
     dateTo: toISODate(values.dateTo),
